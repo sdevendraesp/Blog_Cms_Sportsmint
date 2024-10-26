@@ -1,0 +1,189 @@
+.banner_footer {
+    background-image: url(../images/banner.webp);
+    background-size: cover;
+    padding: 40px 0px;
+    margin-top: 125px;
+}
+
+.banner_footer p {
+    color: rgb(189, 189, 189);
+}
+
+.side_img {
+    position: absolute;
+    bottom: -39px;
+}
+
+.side_img_wrapper {
+    position: relative;
+}
+
+@media screen and (min-device-width: 200px) and (max-device-width: 992px) {
+    .side_img {
+        position: initial;
+    }
+
+    .banner_footer {
+        margin-top: 50px;
+    }
+}
+
+
+
+
+
+
+
+
+/* ====================================================================================== */
+/* ====================================================================================== */
+
+.footer-block ul,
+.social-icon ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+}
+
+.social-icon a{
+    color: white !important;
+}
+
+.copyright p,
+.footer-block ul li a {
+    font-size: 14px;
+    font-family: Montserrat;
+}
+
+footer {
+    width: 100%;
+    height: auto;
+}
+
+.footer-block ul li {
+    margin-right: 25px;
+}
+
+footer a {
+    color: #010001;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.social-icon ul li {
+    margin-right: 15px;
+}
+
+.footer-block ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    text-transform: capitalize;
+    transition: .4s;
+}
+
+.footer-block ul li a:hover {
+    color: #b4b4b4 !important;
+}
+
+.social-icon ul li:last-child {
+    margin-right: 0;
+}
+
+.social-icon ul li a i {
+    transition: .4s;
+}
+
+.social-icon ul li a i:hover {
+    color: #beb3bf !important;
+    transform: scale(1.5);
+}
+
+.social-icon ul li i {
+    height: 26px;
+    width: 26px;
+}
+
+.social-icon ul {
+    justify-content: end;
+}
+
+.copyright p {
+    color: #d7d7d7;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+
+.Productby {
+    display: flex;
+    align-items: center;
+}
+
+.Productby span {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    margin-right: 10px;
+}
+
+.productLogo {
+    width: 100px;
+}
+
+.line {
+    width: 1px;
+    height: 30px;
+    background: #fff;
+    margin: 0 40px;
+}
+
+.infoLink a {
+    font-family: Acumin-RPro;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 100;
+}
+
+@media screen and (min-device-width:200px) and (max-device-width:768px) {
+    .footer-block ul li {
+        margin-right: 0;
+    }
+}
+
+
+.footer-color-continer {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 1;
+    color: white;
+}
+
+.fc_1 {
+    content: "";
+    filter: blur(140px);
+    height: 150px;
+    position: absolute;
+    width: 150px;
+    background: #05D6D9;
+    top: 30%;
+    z-index: -1;
+    right: 14%;
+}
+
+.fc_2 {
+    content: "";
+    filter: blur(140px);
+    height: 150px;
+    position: absolute;
+    width: 212px;
+    background: #05D6D9;
+    top: -11%;
+    z-index: -1;
+    left: 10%;
+}

@@ -133,14 +133,15 @@ body {
     font-style: normal;
 }
 
-/*
+
 @font-face {
-    font-family: 'Unbounded';
-    src: url('../font/Unbounded-Bold.ttf');
-    font-weight: 700;
+    font-family: 'Montserrat';
+    src: url('../font/Montserrat/Montserrat/Montserrat-VariableFont_wght.ttf');
+    font-weight: 500;
     font-style: normal;
 }
 
+/*
 @font-face {
     font-family: 'Montserrat';
     src: url('../font/Montserrat-Regular.ttf');
