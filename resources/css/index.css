@@ -1,3 +1,5 @@
+/* =============== Blog css start ===================== */
+
 /* .blog_poster {
     position: relative;
     background-image: url(../../../../public/assets/images/blog/poster.png);
@@ -21,7 +23,6 @@
     margin-bottom: 5px;
     font-size: 20px;
 } */
-
 
 .border_blog {
     position: relative;
@@ -195,4 +196,161 @@ span.social_icn:hover i {
     .blog .buttom_line::after {
         width: 100%;
     }
+}
+
+/* =============== Blog css end ===================== */
+
+/* =============== Blogdetails css start ============== */
+
+.blog_details_poster img {
+    border: 1px solid rgba(159, 159, 159, 0.2);
+    border-radius: 10px;
+}
+
+.blog_details .detail_content p {
+    color: rgb(175, 175, 175);
+    font-size: 14px;
+}
+
+.uplaod_img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: rgba(72, 72, 72, 0.5);
+    border: 1px solid rgba(159, 159, 159, 0.2);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.uplaod_img input {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.uplaod_img img {
+    position: absolute;
+}
+
+.content_box {
+    background: linear-gradient(103.85deg, rgba(29, 195, 221, 0.1) 0.91%, rgba(249, 7, 252, 0.1) 98.82%);
+    border: 1px solid rgba(159, 159, 159, 0.2);
+    padding: 24px;
+    border-radius: 10px;
+}
+
+.content_box p {
+    letter-spacing: .5px;
+}
+
+.a {
+    color: rgba(192, 192, 192, 1);
+    font-size: 14px;
+}
+
+.blog_details .about_section {
+    background: linear-gradient(103.85deg, rgba(29, 195, 221, 0.1) 0.91%, rgba(249, 7, 252, 0.1) 98.82%);
+}
+
+.blog_details .about_section>div {
+    padding: 18px;
+    border: 1px solid rgba(159, 159, 159, 0.2);
+    border-radius: 16px;
+    background-image: url(../../../../public/assets/images/blog/Frame.png);
+    background-size: 100% 100%;
+}
+
+.about_section .text-decoration-none.d-contents {
+    color: rgb(172, 172, 172) !important;
+}
+
+.buttom_line::after {
+    content: '';
+    background: linear-gradient(90deg, #26F4F9 0%, #F30CFC 100%);
+    height: 1px;
+    width: 100%;
+    display: block;
+    bottom: -4px;
+    position: absolute;
+}
+
+.btn-short {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 3px 12px 0px;
+    font-size: 14px;
+    color: rgba(194, 194, 194, 1);
+    transition: 0.4s;
+}
+
+.btn-short:hover {
+    color: rgb(228, 228, 228);
+    background: rgba(207, 207, 207, 0.1);
+    border: 1px solid white;
+}
+
+.dp_img_wrapper {
+    background: #192222;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.blog_details textarea {
+    --bs-border-color: rgba(255, 255, 255, 0.2);
+}
+
+.blog_details textarea::placeholder {
+    color: rgb(196, 196, 196);
+}
+
+.preview_icn {
+    width: 90px;
+    height: auto;
+}
+
+.preview_img {
+    width: auto;
+    height: 100%;
+}
+
+@media screen and (min-device-width: 200px) and (max-device-width: 768px) {
+    .blog_details h3 {
+        font-size: 14px;
+    }
+
+    .blog_details span {
+        font-size: 12px;
+    }
+
+    .blog_details p {
+        font-size: 12px;
+        letter-spacing: .5px;
+    }
+
+    .uplaod_img {
+        min-height: 20vh;
+    }
+}
+
+/* ======================== blogdetails css end ================================= */
+
+/* ===================== Press css start ============================= */
+.press_card>img {
+    border-radius: 10px;
+    border: 1px solid #373737;
+}
+
+.press_card>p {
+    font-size: 12px;
+}
+
+/* ===================== Press css end =============================== */
+
+input:focus, button:focus, select:focus, textarea {
+    box-shadow: none !important;
 }
