@@ -109,7 +109,7 @@
 				<!-- latest news start -->
 				<div class="mt-5 row">
 					<h4 class="mb-4">Latest Blog</h4>
-					<div class="swiper mySwiper">
+					<div class="swiper mySwiper1">
 						<div class="swiper-wrapper" id="latestBlog">
 
 						</div>
@@ -257,6 +257,18 @@
 		navigation: {
 			nextEl: ".swiper-button-next",
 			prevEl: ".swiper-button-prev",
+		},
+	});
+</script>
+
+
+<script>
+	var swiper1 = new Swiper(".mySwiper1", {
+		slidesPerView: 4,
+		spaceBetween: 15,
+		pagination: {
+			el: ".swiper-pagination",
+			clickable: true,
 		},
 	});
 </script>

@@ -163,7 +163,7 @@ const getLatestBlog = async () => {
 												<img src="../resources/images/blog/card_icn.png" alt="logo icon"
 													class="img-fluid blg_icn" />
 												<div class="px-2">
-													<Link class="text-decoration-none text-black">`+ blogs[i].title.substring(0, 40) + `
+													<Link class="text-decoration-none text-black">`+ blogs[i].title.substring(0, 35) + `
 													</Link>
 													<div>`+ blogs[i].datetime + `</div>
 												</div>
@@ -193,6 +193,7 @@ const getLatestBlog = async () => {
 const goToBlogDetail = (id) => {
 	window.location.href = BASE_URL + 'blogDetail?id=' + id
 }
+
 
 const getBlogDetail = async (id) => {
 	// let request = $.ajax({
@@ -270,19 +271,53 @@ const getBlogDetail = async (id) => {
 	// });
 }
 
-$("#blogCommentForm").submit(function (e) {
-	e.preventDefault(); // avoid to execute the actual submit of the form.
-	var form = $(this);
-	$.ajax({
-		type: "POST",
-		url: API_URL + "submitComment",
-		data: form.serialize(), // serializes the form's elements.
-		success: function (data) {
-			alert(data); // show response from the php script.
-		},
-		error: function (data) {
-			console.log('An error occurred.');
-			console.log(data);
-		},
-	});
-});
+const returnError = (msg) => {
+	$('#resMsg').html(`<p class="alert alert-danger">` + msg + `</p>`);
+	setTimeout(() => {
+		$('#resMsg').html(``);
+	}, 2000)
+}
+
+
+const commentFormSubmit = () => {
+	// e.preventDefault(); // avoid to execute the actual submit of the form.
+
+	if ($('#name').val() == "") {
+		returnError('Name is required');
+		return;
+	}
+	else if ($('#email').val() == "") {
+		returnError('Email is required');
+		return;
+	}
+	else if ($('#comment').val() == "") {
+		returnError('Comment is required');
+		return;
+	}
+	let form = $('#blogCommentForm');
+	try {
+		$.ajax({
+			type: "POST",
+			url: API_URL + "submitComment",
+			data: form.serialize(), // serializes the form's elements.
+			dataType: "JSON",
+			success: function (result) {
+				if (result.data.success) {
+					$('#resMsg').html(`<p class="alert alert-success">Comment submitted successfully.</p>`);
+				}
+				else {
+					returnError(result.data.msg);
+					return;
+				}
+			},
+			error: function (data) {
+				console.log('An error occurred.');
+				returnError('Something went wrong. Please try again!');
+				return;
+			},
+		});
+	} catch (error) {
+		returnError('Something went wrong. Please try again!');
+		return;
+	}
+}
