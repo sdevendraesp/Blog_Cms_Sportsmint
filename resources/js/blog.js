@@ -66,11 +66,11 @@ const getFeaturedBlog = async () => {
 	// 	if (result.success) {
 	// 		let blogs = result.data;
 
-			let featuredBlog = ``;
+	let featuredBlog = ``;
 
-			for (let i = 0; i < 5; i++) {
-				let labels = blogs[i].labels.split(', ');
-				featuredBlog += `<div class="swiper-slide">
+	for (let i = 0; i < 5; i++) {
+		let labels = blogs[i].labels.split(', ');
+		featuredBlog += `<div class="swiper-slide">
 							<div class="pb-5 row">
 								<div class="col-lg-6 mb-5 mb-lg-0">
 									<div class="position-relative">
@@ -107,30 +107,30 @@ const getFeaturedBlog = async () => {
 									<h5 class="mt-4">`+ blogs[i].title + `</h5>
 									<p class="mt-3">`+ blogs[i].short_description + `</p>`;
 
-				if (labels.length > 0) {
+		if (labels.length > 0) {
 
-					featuredBlog += `<div class="">
+			featuredBlog += `<div class="">
 										<p class="fs-4">Labels</p>
 										<div class="row">`;
-					for (let j = 0; j < labels.length; j++) {
-						featuredBlog += `<div class="col-lg-auto col-xs-auto col-sm-6">
+			for (let j = 0; j < labels.length; j++) {
+				featuredBlog += `<div class="col-lg-auto col-xs-auto col-sm-6">
 												<div class="d-flex align-items-center justify-content-start">
 													<div class="me-2"><img src="resources/images/blog/labels.png" alt="label tag" />
 													</div>
 													<span style="color: rgba(88, 174, 255, 1)">`+ labels[j] + `</span>
 												</div>
 											</div>`;
-					}
-					featuredBlog += `</div>
+			}
+			featuredBlog += `</div>
 									</div>`;
-				}
-				featuredBlog += `</div>
+		}
+		featuredBlog += `</div>
 							</div>
 						</div>`;
-			}
-			$('#featuredBlog').html(featuredBlog);
+	}
+	$('#featuredBlog').html(featuredBlog);
 
-		// }
+	// }
 	// });
 
 	// request.fail(function (jqXHR, textStatus) {
@@ -149,9 +149,9 @@ const getLatestBlog = async () => {
 	// 	if (result.success) {
 	// 		let blogs = result.data;
 
-			let latestBlog = ``;
-			for (let i = 0; i < blogs.length; i++) {
-				latestBlog += `<div class="mb-4 col-xl-3 col-lg-4 col-md-6" key={` + i + `} onClick="goToBlogDetail(` + blogs[i].id + `)">
+	let latestBlog = ``;
+	for (let i = 0; i < blogs.length; i++) {
+		latestBlog += `<div class="mb-4 col-xl-3 col-lg-4 col-md-6" key={` + i + `} onClick="goToBlogDetail(` + blogs[i].id + `)">
 						<div class="blog_card">
 							<img src='resources/images/blog/card1.png' alt="blog image" class="img-fluid w-100" width="20" />
 							<div class="blog_card_img">
@@ -167,10 +167,10 @@ const getLatestBlog = async () => {
 							</div>
 						</div>
 					</div>`;
-			}
-			$('#latestBlog').html(latestBlog)
+	}
+	$('#latestBlog').html(latestBlog)
 
-		// }
+	// }
 	// });
 
 	// request.fail(function (jqXHR, textStatus) {
@@ -223,9 +223,6 @@ const getBlogDetail = async (id) => {
 		"datetime": "2024-11-28"
 	};
 
-	console.log(blogDetail);
-	console.log(blogDetail.title);
-
 	let labels = blogDetail.labels.split(', ');
 	let labelsHtml = ``;
 	if (labels.length > 0) {
@@ -242,7 +239,7 @@ const getBlogDetail = async (id) => {
 	else {
 		// $('#blogLabelSection').hide();
 	}
-	let blogImage = "../resources/images/blog/cricket-ball-with-rain.png";
+	let blogImage = "../resources/images/blog/cricket-ball.png";
 	if (blogDetail.image && blogDetail.image != "") {
 		blogImage = blogDetail.image;
 	}
