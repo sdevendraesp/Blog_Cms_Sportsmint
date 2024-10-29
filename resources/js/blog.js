@@ -184,7 +184,7 @@ const getBlogDetail = async (id) => {
 			else {
 				// $('#blogLabelSection').hide();
 			}
-			let blogImage = "../resources/images/blog/cricket-ball-with-rain.png";
+			let blogImage = "../resources/images/blog/cricket-ball.png";
 			if(blogDetail.image && blogDetail.image != ""){
 				blogImage = blogDetail.image;
 			}
