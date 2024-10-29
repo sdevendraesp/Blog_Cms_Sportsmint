@@ -1,58 +1,76 @@
 // Const variables
-const API_URL = 'http://localhost:8010/api/';
-const BASE_URL = '/';
+const API_URL = 'https://sportsmint.espsofttechnologies.com/v1/';
+const BASE_URL = 'https://sportsmint.espsofttechnologies.com/blog';
 
 // // execute when page load
 // $(document).ready(async function () {
 // 	// await getBlogs();
 // })
 
+let blogs = [
+	{
+		"id": 101,
+		"title": "Master the Game with Fantasy Sports Insights and Tips",
+		"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
+		"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
+		"image": "./resources/images/blog/cricket-ball.png",
+		"comment_count": "5",
+		"datetime": "2024-11-28"
+	},
+	{
+		"id": 102,
+		"title": "Master the Game with Fantasy Sports Insights and Tips",
+		"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
+		"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
+		"image": "./resources/images/blog/cricket-ball.png",
+		"comment_count": "20",
+		"datetime": "2024-11-27"
+	},
+	{
+		"id": 103,
+		"title": "Master the Game with Fantasy Sports Insights and Tips",
+		"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
+		"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
+		"image": "./resources/images/blog/cricket-ball.png",
+		"comment_count": "10",
+		"datetime": "2024-11-26"
+	},
+	{
+		"id": 104,
+		"title": "Master the Game with Fantasy Sports Insights and Tips",
+		"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
+		"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
+		"image": "./resources/images/blog/cricket-ball.png",
+		"comment_count": "20",
+		"datetime": "2024-11-27"
+	},
+	{
+		"id": 105,
+		"title": "Master the Game with Fantasy Sports Insights and Tips",
+		"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
+		"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
+		"image": "./resources/images/blog/cricket-ball.png",
+		"comment_count": "20",
+		"datetime": "2024-11-27"
+	},
+]
 
-const getBlogs = async () => {
+
+const getFeaturedBlog = async () => {
 	// let request = $.ajax({
-	// 	url: API_URL + "getBlogs",
+	// 	url: API_URL + "getFeaturedBlog",
 	// 	type: "GET",
 	// 	dataType: "JSON"
 	// });
 	// request.done(function (result) {
 	// 	if (result.success) {
-			// let blogs = result.data;
+	// 		let blogs = result.data;
 
-			let blogs = [
-				{
-					"id": 101,
-					"title": "Master the Game with Fantasy Sports Insights and Tips",
-					"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
-					"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
-					"image": "./resources/images/blog/cricket-ball.png",
-					"comment_count": "5",
-					"datetime": "2024-11-28"
-				},
-				{
-					"id": 102,
-					"title": "Master the Game with Fantasy Sports Insights and Tips",
-					"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
-					"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
-					"image": "./resources/images/blog/cricket-ball.png",
-					"comment_count": "20",
-					"datetime": "2024-11-27"
-				},
-				{
-					"id": 103,
-					"title": "Master the Game with Fantasy Sports Insights and Tips",
-					"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
-					"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
-					"image": "./resources/images/blog/cricket-ball.png",
-					"comment_count": "10",
-					"datetime": "2024-11-26"
-				}
-			]
-			
-			let listItme = ``;
+			let featuredBlog = ``;
 
-			for (let i = 0; i < 3; i++) {
+			for (let i = 0; i < 5; i++) {
 				let labels = blogs[i].labels.split(', ');
-				listItme += `<div class="swiper-slide">
+				featuredBlog += `<div class="swiper-slide">
 							<div class="pb-5 row">
 								<div class="col-lg-6 mb-5 mb-lg-0">
 									<div class="position-relative">
@@ -91,11 +109,11 @@ const getBlogs = async () => {
 
 				if (labels.length > 0) {
 
-					listItme += `<div class="">
+					featuredBlog += `<div class="">
 										<p class="fs-4">Labels</p>
 										<div class="row">`;
 					for (let j = 0; j < labels.length; j++) {
-						listItme += `<div class="col-lg-auto col-xs-auto col-sm-6">
+						featuredBlog += `<div class="col-lg-auto col-xs-auto col-sm-6">
 												<div class="d-flex align-items-center justify-content-start">
 													<div class="me-2"><img src="resources/images/blog/labels.png" alt="label tag" />
 													</div>
@@ -103,20 +121,16 @@ const getBlogs = async () => {
 												</div>
 											</div>`;
 					}
-					listItme += `</div>
+					featuredBlog += `</div>
 									</div>`;
 				}
-				listItme += `</div>
+				featuredBlog += `</div>
 							</div>
 						</div>`;
 			}
+			$('#featuredBlog').html(featuredBlog);
 
-			for (let i = 0; i < 3; i++) {
-				
-			}
-
-			$('#topThreeBlogs').html(listItme)
-	// 	}
+		// }
 	// });
 
 	// request.fail(function (jqXHR, textStatus) {
@@ -125,22 +139,66 @@ const getBlogs = async () => {
 	// });
 }
 
-const getBlogDetail = async (id) => {
+const getLatestBlog = async () => {
 	// let request = $.ajax({
-	// 	url: API_URL + "getBlogDetail?id=" + id,
+	// 	url: API_URL + "getLatestBlog",
 	// 	type: "GET",
 	// 	dataType: "JSON"
 	// });
 	// request.done(function (result) {
 	// 	if (result.success) {
-			// let blogDetail = result.data;
+	// 		let blogs = result.data;
 
-			let blogDetail = {
-				"id": 101,
-				"title": "Master the Game with Fantasy Sports Insights and Tips",
-				"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
-				"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
-				"description": `<p>From its humble origins as a way to manage teams and players to a multibillion-dollar
+			let latestBlog = ``;
+			for (let i = 0; i < blogs.length; i++) {
+				latestBlog += `<div class="mb-4 col-xl-3 col-lg-4 col-md-6" key={` + i + `} onClick="goToBlogDetail(` + blogs[i].id + `)">
+						<div class="blog_card">
+							<img src='resources/images/blog/card1.png' alt="blog image" class="img-fluid w-100" width="20" />
+							<div class="blog_card_img">
+								<div class="d-flex justify-content-between align-items-center">
+									<img src="resources/images/blog/card_icn.png" alt="logo icon" class="img-fluid blg_icn" />
+									<div class="px-2">
+										<Link class="text-decoration-none text-black">`+ blogs[i].title.substring(0, 40) + `
+										</Link>
+										<div>`+ blogs[i].datetime + `</div>
+									</div>
+								</div>
+								<p style="color:rgba(111, 111, 111, 1)" class="mt-3">`+ blogs[i].short_description.substring(0, 75) + `... <b>Read More</b></p>
+							</div>
+						</div>
+					</div>`;
+			}
+			$('#latestBlog').html(latestBlog)
+
+		// }
+	// });
+
+	// request.fail(function (jqXHR, textStatus) {
+	// 	console.log('Something went wrong!');
+	// 	alert('Something went wrong!');
+	// });
+}
+
+const goToBlogDetail = (id) => {
+	window.location.href = BASE_URL + 'blogDetail?id=' + id
+}
+
+const getBlogDetail = async (id) => {
+	// let request = $.ajax({
+	// 	url: API_URL + "getBlogDetail?blog_id=" + id,
+	// 	type: "GET",
+	// 	dataType: "JSON"
+	// });
+	// request.done(function (result) {
+	// 	if (result.success) {
+	// let blogDetail = result.data;
+
+	let blogDetail = {
+		"id": 101,
+		"title": "Master the Game with Fantasy Sports Insights and Tips",
+		"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
+		"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
+		"description": `<p>From its humble origins as a way to manage teams and players to a multibillion-dollar
 										business, this virtual world fundamentally changed our passion for games.</p>
 	
 									<p>But what exactly is pushing such exponential growth? Why are fantasy leagues drawing
@@ -159,43 +217,43 @@ const getBlogDetail = async (id) => {
 									<p>With distinctive features that can touch diverse global audiences, such as the thrill
 										of one-on-one contests and chances of winning huge monetary awards, fantasy sports
 										cricket offer something different from other forms of entertainment worldwide.</p>`,
-				"image": "",
-				// "image": "./resources/images/blog/cricket-ball.png",
-				"comment_count": "5",
-				"datetime": "2024-11-28"
-			};
+		"image": "",
+		// "image": "./resources/images/blog/cricket-ball.png",
+		"comment_count": "5",
+		"datetime": "2024-11-28"
+	};
 
-			console.log(blogDetail);
-			console.log(blogDetail.title);
+	console.log(blogDetail);
+	console.log(blogDetail.title);
 
-			let labels = blogDetail.labels.split(', ');
-			let labelsHtml = ``;
-			if (labels.length > 0) {
-				for (let j = 0; j < labels.length; j++) {
-					labelsHtml += `<div class="col-lg-auto col-xs-auto col-sm-6">
+	let labels = blogDetail.labels.split(', ');
+	let labelsHtml = ``;
+	if (labels.length > 0) {
+		for (let j = 0; j < labels.length; j++) {
+			labelsHtml += `<div class="col-lg-auto col-xs-auto col-sm-6">
 											<div class="d-flex align-items-center justify-content-start">
 												<div class="me-2"><img src="resources/images/blog/labels.png" alt="label tag" />
 												</div>
 												<span style="color: rgba(88, 174, 255, 1)">`+ labels[j] + `</span>
 											</div>
 										</div>`;
-				}
-			}
-			else {
-				// $('#blogLabelSection').hide();
-			}
-			let blogImage = "../resources/images/blog/cricket-ball-with-rain.png";
-			if(blogDetail.image && blogDetail.image != ""){
-				blogImage = blogDetail.image;
-			}
-			let blogImageHtml = `<img src="`+blogImage+`" alt="` + blogDetail.title + `" class="img-fluid" />`;
+		}
+	}
+	else {
+		// $('#blogLabelSection').hide();
+	}
+	let blogImage = "../resources/images/blog/cricket-ball-with-rain.png";
+	if (blogDetail.image && blogDetail.image != "") {
+		blogImage = blogDetail.image;
+	}
+	let blogImageHtml = `<img src="` + blogImage + `" alt="` + blogDetail.title + `" class="img-fluid" />`;
 
-			$('#blogTitle').html(blogDetail.title);
-			$('#blogImage').html(blogImageHtml);
-			$('#blogDate').html(blogDetail.datetime);
-			$('#blogLabels').html(labelsHtml);
-			$('#blogShortDescription').html(blogDetail.short_description);
-			$('#blogDescription').html(blogDetail.description);
+	$('#blogTitle').html(blogDetail.title);
+	$('#blogImage').html(blogImageHtml);
+	$('#blogDate').html(blogDetail.datetime);
+	$('#blogLabels').html(labelsHtml);
+	$('#blogShortDescription').html(blogDetail.short_description);
+	$('#blogDescription').html(blogDetail.description);
 	// 	}
 	// });
 	// request.fail(function (jqXHR, textStatus) {
@@ -203,3 +261,20 @@ const getBlogDetail = async (id) => {
 	// 	alert('Something went wrong!');
 	// });
 }
+
+$("#blogCommentForm").submit(function (e) {
+	e.preventDefault(); // avoid to execute the actual submit of the form.
+	var form = $(this);
+	$.ajax({
+		type: "POST",
+		url: API_URL + "submitComment",
+		data: form.serialize(), // serializes the form's elements.
+		success: function (data) {
+			alert(data); // show response from the php script.
+		},
+		error: function (data) {
+			console.log('An error occurred.');
+			console.log(data);
+		},
+	});
+});
