@@ -151,22 +151,33 @@ const getLatestBlog = async () => {
 
 	let latestBlog = ``;
 	for (let i = 0; i < blogs.length; i++) {
-		latestBlog += `<div class="mb-4 col-xl-3 col-lg-4 col-md-6" key={` + i + `} onClick="goToBlogDetail(` + blogs[i].id + `)">
-						<div class="blog_card">
-							<img src='resources/images/blog/card1.png' alt="blog image" class="img-fluid w-100" width="20" />
-							<div class="blog_card_img">
-								<div class="d-flex justify-content-between align-items-center">
-									<img src="resources/images/blog/card_icn.png" alt="logo icon" class="img-fluid blg_icn" />
-									<div class="px-2">
-										<Link class="text-decoration-none text-black">`+ blogs[i].title.substring(0, 40) + `
-										</Link>
-										<div>`+ blogs[i].datetime + `</div>
+
+
+		latestBlog += `<div class="swiper-slide">
+								<div class="" key={index} onClick="goToBlogDetail(` + blogs[i].id + `)">
+									<div class="blog_card">
+										<img src='../resources/images/blog/card1.png' alt="blog image"
+											class="img-fluid w-100" width="20" />
+										<div class="blog_card_img">
+											<div class="d-flex justify-content-between align-items-center">
+												<img src="../resources/images/blog/card_icn.png" alt="logo icon"
+													class="img-fluid blg_icn" />
+												<div class="px-2">
+													<Link class="text-decoration-none text-black">`+ blogs[i].title.substring(0, 40) + `
+													</Link>
+													<div>`+ blogs[i].datetime + `</div>
+												</div>
+												<span class="fs-4" style="color:gray">
+													<i class="fa-solid fa-arrow-up"
+														style="transform: rotate(45deg);"></i>
+												</span>
+											</div>
+
+											<p style="color:rgba(111, 111, 111, 1)" class="mt-3">`+ blogs[i].short_description.substring(0, 75) + `... <b>Read More</b></p>
+										</div>
 									</div>
 								</div>
-								<p style="color:rgba(111, 111, 111, 1)" class="mt-3">`+ blogs[i].short_description.substring(0, 75) + `... <b>Read More</b></p>
-							</div>
-						</div>
-					</div>`;
+							</div>`;
 	}
 	$('#latestBlog').html(latestBlog)
 
