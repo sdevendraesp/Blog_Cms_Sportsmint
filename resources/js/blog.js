@@ -1,6 +1,6 @@
 // Const variables
 const API_URL = 'https://sportsmint.espsofttechnologies.com/v1/';
-const BASE_URL = 'https://sportsmint.espsofttechnologies.com/blog';
+const BASE_URL = '/';
 
 // // execute when page load
 // $(document).ready(async function () {
