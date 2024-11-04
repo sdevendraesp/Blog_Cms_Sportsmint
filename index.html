@@ -82,6 +82,7 @@
 			$("#footerBanner").load("footerBanner.html");
 			getFeaturedBlog();
 			getLatestBlog();
+			getBlogCategories();
 		});
 	</script>
 
@@ -123,120 +124,16 @@
 					<p class="fs-3 mb-3">Categories</p>
 
 					<div class="categories_box">
-						<div class="row">
-							<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto">
-								<a href="categories.html" class="text-decoration-none">
-									<Button class="px-4 mb-4 btn btn-primary-outline-btn">Games</Button>
-								</a>
-							</div>
+						<div class="row" id="blogCategories">
 
-							<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto">
-								<a href="categories.html" class="text-decoration-none">
-									<Button class="px-4 mb-4 btn btn-primary-outline-btn">Action</Button>
-								</a>
-							</div>
+							
 
-							<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto">
-								<a href="categories.html" class="text-decoration-none">
-									<Button class="px-4 mb-4 btn btn-primary-outline-btn">Popular Posts</Button>
-								</a>
-							</div>
-
-							<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto">
-								<a href="categories.html" class="text-decoration-none">
-									<Button class="px-4 mb-4 btn btn-primary-outline-btn">Latest Post</Button>
-								</a>
-							</div>
-
-							<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto">
-								<a href="categories.html" class="text-decoration-none">
-									<Button class="px-4 mb-4 btn btn-primary-outline-btn">Action</Button>
-								</a>
-							</div>
 						</div>
 					</div>
 				</div>
 				<!-- Categories end -->
 
-				<!-- Labels start -->
-				<div class="mt-5 row">
-					<div class="col-md-6">
-						<div class="d-flex justify-content-between align-items-center">
-							<p class="fs-3 mb-0">Labels</p>
-							<small style="color: rgba(194, 194, 194, 1);">August 2024</small>
-						</div>
-
-						<hr />
-
-						<div class="row">
-							<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto px-1" class="px-1">
-								<div class="bedge">fantasy cricket</div>
-							</div>
-
-							<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto px-1" class="px-1">
-								<div class="bedge">fantasy cricket league</div>
-							</div>
-
-							<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto px-1" class="px-1">
-								<div class="bedge">fantasy cricket tips</div>
-							</div>
-
-							<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto px-1" class="px-1">
-								<div class="bedge">fantasy sports</div>
-							</div>
-
-							<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto px-1" class="px-1">
-								<div class="bedge">fantasy cricket</div>
-							</div>
-
-							<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto px-1" class="px-1">
-								<div class="bedge">indian fantasy cricket</div>
-							</div>
-
-							<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto px-1" class="px-1">
-								<div class="bedge">fantasy sports</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="mt-5 mt-md-0 col-md-6">
-						<p class="fs-3" style="font-weight: 500;">Social Share</p>
-						<hr />
-						<div class="d-flex">
-
-							<Link>
-							<span class="social_icn">
-								<i class="fa-brands fa-instagram"></i>
-							</span>
-							</Link>
-
-							<Link>
-							<span class="social_icn">
-								<i class="fa-brands fa-x-twitter"></i>
-							</span>
-							</Link>
-
-							<Link>
-							<span class="social_icn">
-								<i class="fa-brands fa-telegram"></i>
-							</span>
-							</Link>
-
-							<Link>
-							<span class="social_icn">
-								<i class="fa-brands fa-facebook-f"></i>
-							</span>
-							</Link>
-
-							<Link>
-							<span class="social_icn">
-								<i class="fa-brands fa-linkedin"></i>
-							</span>
-							</Link>
-						</div>
-					</div>
-				</div>
-				<!-- Labels end -->
+	
 			</div>
 		</div>
 

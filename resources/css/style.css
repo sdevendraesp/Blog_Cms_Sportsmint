@@ -902,3 +902,15 @@ fieldset:disabled .btn {
 input {
     font-family: revert !important;
 }
+
+.requiredStar{
+    color: red;
+}
+
+.requiredThis{
+    border: 1px solid red;
+}
+
+.comment-input .form_control{
+    color: #fff;
+}

@@ -80,8 +80,9 @@
             $("#header").load("header.html");
             $("#footer").load("footer.html");
             $("#footerBanner").load("footerBanner.html");
-            getFeaturedBlog();
-            getLatestBlog();
+            const params = new URLSearchParams(document.location.search);
+			const id = params.get("q");
+            getBlogsByCategory(id);
         });
     </script>
 
@@ -103,9 +104,9 @@
 
                 <!-- latest news start -->
                 <div class="mt-5 row">
-                    <h4 class="mb-4">Latest Blog</h4>
+                    <!-- <h4 class="mb-4">Latest Blog</h4> -->
                     <div class="swiper logslider">
-                        <div class="swiper-wrapper" id="latestBlog">
+                        <div class="swiper-wrapper" id="blogsByCategory">
 
                         </div>
                         <div class="swiper-pagination" style="top: -16px;"></div>
@@ -128,24 +129,7 @@
 </body>
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script>
-    const swiper = new Swiper(".mySwiper", {
-        spaceBetween: 10,
-        loop: true,
-        autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-    });
-</script>
+
 
 <script>
     var swiper1 = new Swiper(".logslider", {
