@@ -30,8 +30,9 @@
         crossorigin="anonymous"></script>
     <!-- bootstrap -->
     <!-- jquery and blog js -->
-    <script src="./resources/js/jquery.min.js"></script>
-    <script src="./resources/js/blog.js"></script>
+	<script src="./resources/js/config.js"></script>
+	<script src="./resources/js/jquery.min.js"></script>
+	<script src="./resources/js/blog.js"></script>
 
     <meta name="keywords"
         content="Fantasy Play Sports, Sportsmint Official Blog, Fantasy Cricket Blog, predictions to play fantasy cricket, daily fantasy sports blogs, fantasy cricket blog" />
@@ -81,7 +82,9 @@
             $("#footer").load("footer.html");
             $("#footerBanner").load("footerBanner.html");
             const params = new URLSearchParams(document.location.search);
-			const id = params.get("q");
+			const id = params.get("c");
+            const category_name = params.get("cn");
+			$('#category_name').html(String(category_name).charAt(0).toUpperCase() + String(category_name).slice(1));
             getBlogsByCategory(id);
         });
     </script>
@@ -99,7 +102,7 @@
         <div class="container">
             <div class="featured_news mt-5">
 
-                <h2>Games</h2>
+                <h2 id="category_name"></h2>
                 <hr>
 
                 <!-- latest news start -->

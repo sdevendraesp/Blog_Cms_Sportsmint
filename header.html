@@ -1,57 +1,119 @@
- <!-- header start -->
+<script type="module">
+  $(function () {
+    const loginUserData = localStorage.getItem("loginSuccessWeb3Sports")
+      ? JSON.parse(localStorage.getItem("loginSuccessWeb3Sports"))
+      : ""; /// get it from local storage
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="./resources/images/blog/White Logo.svg" class="mainLogo"
-                    alt="Sportsmint 2025 sports fantasy" />
-            </a>
+    document.querySelector("#nav1").href = BASE_URL + "features";
+    document.querySelector("#nav2").href = BASE_URL + "nfts";
+    document.querySelector("#nav3").href = BASE_URL + "marketplace";
+    document.querySelector("#nav4").href = BASE_URL + "earnerboard";
+    document.querySelector("#nav5").href = BASE_URL;
 
-            <div class="navbar-toggler collapsed d-lg-none" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
-                <i class="fa-solid fa-bars"></i>
-            </div>
+    if (loginUserData != "") {
+        let action = `<button type="button" class="px-5 me-4 btn btn-primary-outline-btn" onclick="redirectTo('events')">ContestS</button>
+      <button type="button" class="px-5 btn btn-primary-btn" onclick="logoutUser()">LOGOUT</button>`; // Added onclick event to call logoutUser function
+    $("#authAction").html(action);
+    } 
+    else {
+      let action = `<button type="button" class="px-5 me-4 btn btn-primary-outline-btn" onclick="redirectTo('register')">REGISTER</button>
+        <button type="button" class="px-5 btn btn-primary-btn" onclick="redirectTo('login')">LOGIN</button>`;
+      $("#authAction").html(action);
+    }
+  });
 
-            <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
-                <div class="navbar-nav m-auto">
-                    <a class="nav-link" href="#">Features</a>
-                    <a class="nav-link" href="#">NFT's</a>
-                    <a class="nav-link" href="#">MARKETPLACE</a>
-                    <a class="nav-link" href="#">TOP EARNER</a>
-                    <a class="nav-link" href="/">BLOG</a>
-                </div>
+  // Attach redirectTo to the window object
+  window.redirectTo = (actionUrl) => {
+    window.location.href = WEBSITE_URL + actionUrl;
+  };
 
-                <div class="d-flex justify-content-center align-items-center">
-                    <button class="px-5 me-4 btn btn-primary-outline-btn">ContestS</button>
-                    <button class="px-5 btn btn-primary-btn">lOGOUT</button>
-                </div>
-            </div>
-        </div>
-    </nav>
+  // Attach logoutUser to the window object
+  window.logoutUser = () => {
+    localStorage.removeItem("loginSuccessWeb3Sports");
+    location.reload();
+  };
+</script>
 
+<!-- header start -->
 
-    <div class="d-lg-none">
-        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
-            aria-labelledby="offcanvasWithBothOptionsLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
-                    <img src="./resources/images/blog/White Logo.svg" alt="logo" class="sidebarLogo">
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <a class="nav-link my-3" href="#">Features</a>
-                <a class="nav-link my-3" href="#">NFT's</a>
-                <a class="nav-link my-3" href="#">MARKETPLACE</a>
-                <a class="nav-link my-3" href="#">TOP EARNER</a>
-                <a class="nav-link my-3" href="/">BLOG</a>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img
+        src="./resources/images/blog/White Logo.svg"
+        class="mainLogo"
+        alt="Sportsmint 2025 sports fantasy"
+      />
+    </a>
 
-                <div class="mt-4">
-                    <button class="px-5 me-4 btn btn-primary-outline-btn mb-3">ContestS</button>
-                    <button class="px-5 btn btn-primary-btn">lOGOUT</button>
-                </div>
-            </div>
-        </div>
+    <div
+      class="navbar-toggler collapsed d-lg-none"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasWithBothOptions"
+      aria-controls="offcanvasWithBothOptions"
+    >
+      <i class="fa-solid fa-bars"></i>
     </div>
+
+    <div
+      class="collapse navbar-collapse justify-content-between"
+      id="navbarNavAltMarkup"
+    >
+      <div class="navbar-nav m-auto">
+        <a class="nav-link" id="nav1" href="#">Features</a>
+        <a class="nav-link" id="nav2" href="#">NFT's</a>
+        <a class="nav-link" id="nav3" href="#">MARKETPLACE</a>
+        <a class="nav-link" id="nav4" href="#">TOP EARNER</a>
+        <a class="nav-link" id="nav5" href="#">BLOG</a>
+      </div>
+
+      <div
+        class="d-flex justify-content-center align-items-center"
+        id="authAction"
+      ></div>
+    </div>
+  </div>
+</nav>
+
+<div class="d-lg-none">
+  <div
+    class="offcanvas offcanvas-end"
+    data-bs-scroll="true"
+    tabindex="-1"
+    id="offcanvasWithBothOptions"
+    aria-labelledby="offcanvasWithBothOptionsLabel"
+  >
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+        <img
+          src="./resources/images/blog/White Logo.svg"
+          alt="logo"
+          class="sidebarLogo"
+        />
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="offcanvas-body">
+      <a class="nav-link my-3" id="nav1" href="#">Features</a>
+      <a class="nav-link my-3" id="nav2" href="#">NFT's</a>
+      <a class="nav-link my-3" id="nav3" href="#">MARKETPLACE</a>
+      <a class="nav-link my-3" id="nav4" href="#">TOP EARNER</a>
+      <a class="nav-link my-3" id="nav5" href="#">BLOG</a>
+
+      <div class="mt-4" id="authAction2">
+        <button class="px-5 me-4 btn btn-primary-outline-btn mb-3">
+          ContestS
+        </button>
+        <button class="px-5 btn btn-primary-btn AuthBtn">LOGIN</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- header end -->

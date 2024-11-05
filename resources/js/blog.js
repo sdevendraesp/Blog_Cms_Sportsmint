@@ -1,10 +1,10 @@
-// Const variables Dev Server
-const API_URL = 'https://sportsmint.espsofttechnologies.com/v1/';
-const BASE_URL = 'https://sportsmint.espsofttechnologies.com/blog/';
 
-// Const variables Live Server
-// const API_URL = 'https://sportsmint.io/v1/';
-// const BASE_URL = 'https://sportsmint.io/';
+
+const loginUserData = (localStorage.getItem('loginSuccessWeb3Sports') ? JSON.parse(localStorage.getItem('loginSuccessWeb3Sports')) : "");  /// get it from local storage
+let user_id = 0;
+if (loginUserData != "") {
+	user_id = loginUserData?.data.id;
+}
 
 // let blogs = [
 // 	{
@@ -62,31 +62,37 @@ const getFeaturedBlog = async () => {
 		dataType: "JSON"
 	});
 	request.done(function (result) {
-		if (result.success) {
+		if (result?.success) {
 			let blogs = result.data;
 
 			let featuredBlog = ``;
 
-			for (let i = 0; i < 5; i++) {
-				let labels = blogs[i].labels.split(', ');
+			for (let i = 0; i < blogs.length; i++) {
+				let labels = blogs[i]?.labels.split(',');
+				let date = new Date(blogs[i]?.created_at);
+				let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+
+				// let labels = blogs[i]?.labels;
+				// labels = labels.replace(/["{}]/g, ""); // remove the curly braces and quotes
+				// labels = labels.split(", ");
 				featuredBlog += `<div class="swiper-slide">
 							<div class="pb-5 row">
 								<div class="col-lg-6 mb-5 mb-lg-0">
 									<div class="position-relative">
-										<img src="`+ blogs[i].image + `" alt="` + blogs[i].title + `"
+										<img src="`+ IMG_URL + blogs[i]?.image + `" alt="` + blogs[i]?.title + `"
 											class="img-fluid blog_bg_img" />
 										<div class="content">
 											<div>
-												<h5>`+ blogs[i].title + `</h5>
+												<h5>`+ blogs[i]?.title + `</h5>
 												<div class="d-flex justify-content-between align-items-center mt-3">
 													<div>
 														<div class="date_post">
-															`+ blogs[i].datetime + `
-															<span style="color: #58aeff;">/ `+ blogs[i].comment_count + `
+															`+ formattedDate + `
+															<span style="color: #58aeff;">/ `+ blogs[i]?.comment_count + `
 																Comments</span>
 														</div>
 													</div>
-													<a href="`+ BASE_URL + `blogDetail?id=` + blogs[i].id + `" class="read_more">
+													<a href="`+ BASE_URL + `detail.html?id=` + blogs[i]?.id + `" class="read_more">
 														<span class="me-1">Read More</span>
 														<span class="fs-5 d-flex text-white">
 															<i class="fa-solid fa-arrow-up" style="transform: rotate(45deg); color: gray"></i>
@@ -103,15 +109,15 @@ const getFeaturedBlog = async () => {
 											<span class="buttom_line">Featured News</span>
 										</h4>
 									</div>
-									<h5 class="mt-4">`+ blogs[i].title + `</h5>
-									<p class="mt-3">`+ blogs[i].short_description + `</p>`;
+									<h5 class="mt-4">`+ blogs[i]?.title + `</h5>
+									<p class="mt-3">`+ blogs[i]?.short_description + `</p>`;
 
-				if (labels.length > 0) {
+				if (labels?.length > 0) {
 
 					featuredBlog += `<div class="">
 										<p class="fs-4">Labels</p>
 										<div class="row">`;
-					for (let j = 0; j < labels.length; j++) {
+					for (let j = 0; j < labels?.length; j++) {
 						featuredBlog += `<div class="col-lg-auto col-xs-auto col-sm-6">
 												<div class="d-flex align-items-center justify-content-start">
 													<div class="me-2"><img src="resources/images/blog/labels.png" alt="label tag" />
@@ -145,26 +151,28 @@ const getLatestBlog = async () => {
 		dataType: "JSON"
 	});
 	request.done(function (result) {
-		if (result.success) {
+		if (result?.success) {
 			let blogs = result.data;
 
 			let latestBlog = ``;
 			for (let i = 0; i < blogs.length; i++) {
+				let date = new Date(blogs[i].created_at);
+				let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 
 
 				latestBlog += `<div class="swiper-slide">
 								<div class="" key={index} onClick="goToBlogDetail(` + blogs[i].id + `)">
 									<div class="blog_card">
-										<img src='../resources/images/blog/card1.png' alt="blog image"
+										<img src='`+ IMG_URL + blogs[i].image + `' alt="blog image"
 											class="img-fluid w-100" width="20" />
 										<div class="blog_card_img">
 											<div class="d-flex justify-content-between align-items-center">
-												<img src="../resources/images/blog/card_icn.png" alt="logo icon"
+												<img src="./resources/images/blog/card_icn.png" alt="logo icon"
 													class="img-fluid blg_icn" />
 												<div class="px-2">
 													<Link class="text-decoration-none text-black">`+ blogs[i].title.substring(0, 35) + `
 													</Link>
-													<div>`+ blogs[i].datetime + `</div>
+													<div>`+ formattedDate + `</div>
 												</div>
 												<span class="fs-4" style="color:gray">
 													<i class="fa-solid fa-arrow-up"
@@ -190,7 +198,7 @@ const getLatestBlog = async () => {
 }
 
 const goToBlogDetail = (id) => {
-	window.location.href = BASE_URL + 'blogDetail?id=' + id
+	window.location.href = BASE_URL + 'detail.html?id=' + id
 }
 
 const getBlogDetail = async (id) => {
@@ -200,7 +208,7 @@ const getBlogDetail = async (id) => {
 		dataType: "JSON"
 	});
 	request.done(function (result) {
-		if (result.success) {
+		if (result?.success) {
 			let blogDetail = result.data;
 
 			// let blogDetail = {
@@ -233,7 +241,7 @@ const getBlogDetail = async (id) => {
 			// 	"datetime": "2024-11-28"
 			// };
 
-			let labels = blogDetail.labels.split(', ');
+			let labels = blogDetail.labels.split(',');
 			let labelsHtml = ``;
 			if (labels.length > 0) {
 				for (let j = 0; j < labels.length; j++) {
@@ -251,13 +259,16 @@ const getBlogDetail = async (id) => {
 			}
 			let blogImage = "../resources/images/blog/cricket-ball.png";
 			if (blogDetail.image && blogDetail.image != "") {
-				blogImage = blogDetail.image;
+				blogImage = IMG_URL + blogDetail.image;
 			}
 			let blogImageHtml = `<img src="` + blogImage + `" alt="` + blogDetail.title + `" class="img-fluid" />`;
 
+			let date = new Date(blogDetail.created_at);
+			let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+
 			$('#blogTitle').html(blogDetail.title);
 			$('#blogImage').html(blogImageHtml);
-			$('#blogDate').html(blogDetail.datetime);
+			$('#blogDate').html(formattedDate);
 			$('#blogLabels').html(labelsHtml);
 			$('#blogShortDescription').html(blogDetail.short_description);
 			$('#blogDescription').html(blogDetail.description);
@@ -277,7 +288,7 @@ const getComments = async (blog_id) => {
 		dataType: "JSON"
 	});
 	request.done(function (result) {
-		if (result.success) {
+		if (result?.success) {
 			let data = result.data;
 			$('#blogCommentCount').html(data.length)
 			let comments = ``;
@@ -288,7 +299,7 @@ const getComments = async (blog_id) => {
 				comments += `<div class="comment_box mt-4">
 											<div class="comment_wrapper">
 												<div class="d-flex align-items-center justify-content-start">
-													<img src="https://pinnacle.works/wp-content/uploads/2022/06/dummy-image.jpg"
+													<img src="`+data[i].profile_pic+`"
 														class="p_p img-fluid me-2">
 
 													<div class="name mb-0 me-5">`+ data[i].name + `</div>
@@ -299,7 +310,7 @@ const getComments = async (blog_id) => {
 
 											<div class="feature d-flex align-items-center">
 												<span class="like me-4" onclick="likeThisComment(`+ data[i].id + `, ` + blog_id + `)">
-													<i class="fa-regular fa-thumbs-up"></i>
+													<i class="fa-regular fa-thumbs-up"></i> &nbsp; `+data[i].like_count+`
 												</span>
 
 											</div>
@@ -319,13 +330,13 @@ const getComments = async (blog_id) => {
 }
 
 const likeThisComment = (comment_id, blog_id) => {
-	let loginUserData = (localStorage.getItem('loginSuccessWeb3Sports') ? JSON.parse(localStorage.getItem('loginSuccessWeb3Sports')) : "");  /// get it from local storage
+
 	if (loginUserData == "") {
 		alert('Login required!!!!!')
 		return;
 	}
 	else {
-		let TOKEN = loginUserData.data.authToken;
+		let TOKEN = loginUserData?.data.authToken;
 		$.ajax({
 			type: "POST",
 			url: API_URL + "likeThisComment",
@@ -357,13 +368,7 @@ const returnError = (element) => {
 	}, 2000)
 }
 
-
 const commentFormSubmit = () => {
-	let loginUserData = (localStorage.getItem('loginSuccessWeb3Sports') ? JSON.parse(localStorage.getItem('loginSuccessWeb3Sports')) : "");  /// get it from local storage
-	let user_id = null;
-	if (loginUserData != "") {
-		user_id = loginUserData?.data.id;
-	}
 
 	if ($('#name').val() == "") {
 		returnError('name');
@@ -383,20 +388,25 @@ const commentFormSubmit = () => {
 			type: "POST",
 			url: API_URL + "submitComment",
 			data: {
-				'name':$('#name').val(),
-				'email':$('#email').val(),
-				'comment':$('#comment').val(),
-				'blog_id':$('#blog_id').val(),
-				'website':$('#website').val(),
-				'user_id':user_id
+				'name': $('#name').val(),
+				'email': $('#email').val(),
+				'comment': $('#comment').val(),
+				'blog_id': $('#blog_id').val(),
+				'website': $('#website').val(),
+				'user_id': user_id
 			},
 			dataType: "JSON",
 			success: function (result) {
-				if (result?.data.success) {
+				if (result?.success) {
+					$('.form_control').removeClass('requiredThis')
+					$('#name').val("");
+					$('#email').val("");
+					$('#website').val("");
+					$('#comment').val("");
 					$('#resMsg').html(`<p class="alert alert-success">Comment submitted successfully.</p>`);
 				}
 				else {
-					returnError(result.data.msg);
+					returnError(result?.msg);
 					return;
 				}
 			},
@@ -412,53 +422,50 @@ const commentFormSubmit = () => {
 	}
 }
 
-
-
-
 const getBlogCategories = async () => {
-	// let request = $.ajax({
-	// 	url: API_URL + "getBlogCategories",
-	// 	type: "GET",
-	// 	dataType: "JSON"
-	// });
-	// request.done(function (result) {
-	// 	if (result.success) {
-	// 		let data = result.data;
+	let request = $.ajax({
+		url: API_URL + "getBlogCategories",
+		type: "GET",
+		dataType: "JSON"
+	});
+	request.done(function (result) {
+		if (result?.success) {
+			let data = result.data;
 
-	let data = [
-		{
-			"id":1,
-			"category":"Games",
-		},
-		{
-			"id":1,
-			"category":"Sports",
-		},
-		{
-			"id":1,
-			"category":"Cricket",
-		},
-		{
-			"id":1,
-			"category":"Fantacy",
-		}
-	]
+			// let data = [
+			// 	{
+			// 		"id":1,
+			// 		"category":"Games",
+			// 	},
+			// 	{
+			// 		"id":1,
+			// 		"category":"Sports",
+			// 	},
+			// 	{
+			// 		"id":1,
+			// 		"category":"Cricket",
+			// 	},
+			// 	{
+			// 		"id":1,
+			// 		"category":"Fantacy",
+			// 	}
+			// ]
 			let list = ``;
 			for (let i = 0; i < data.length; i++) {
 				list += `<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto">
-								<a href="`+BASE_URL+`categoryBlog.html?q=`+data[i].id+`" class="text-decoration-none">
-									<Button class="px-4 mb-4 btn btn-primary-outline-btn">`+data[i].category+`</Button>
+								<a href="`+ BASE_URL + `category-blog.html?c=` + data[i].id + `&cn=` + data[i].category_name + `" class="text-decoration-none">
+									<Button class="px-4 mb-4 btn btn-primary-outline-btn">`+ data[i].category_name + `</Button>
 								</a>
 							</div>`;
 			}
 			$('#blogCategories').html(list);
-	// 	}
-	// });
+		}
+	});
 
-	// request.fail(function (jqXHR, textStatus) {
-	// 	console.log('Something went wrong!');
-	// 	alert('Something went wrong!');
-	// });
+	request.fail(function (jqXHR, textStatus) {
+		console.log('Something went wrong!');
+		alert('Something went wrong!');
+	});
 }
 
 // 
@@ -469,14 +476,38 @@ const getBlogsByCategory = async (category_id) => {
 		dataType: "JSON"
 	});
 	request.done(function (result) {
-		if (result.success) {
-			let data = result.data;
+		if (result?.success) {
+			let blogs = result.data;
 			let list = ``;
-			for (let i = 0; i < data.length; i++) {
-				let date = new Date(data[i].created_at);
+			for (let i = 0; i < blogs.length; i++) {
+				let date = new Date(blogs[i].created_at);
 				let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 
-				list += ``;
+				list += `<div class="swiper-slide">
+								<div class="" key={index} onClick="goToBlogDetail(` + blogs[i].id + `)">
+									<div class="blog_card">
+										<img src='`+ IMG_URL + blogs[i].image + `' alt="blog image"
+											class="img-fluid w-100" width="20" />
+										<div class="blog_card_img">
+											<div class="d-flex justify-content-between align-items-center">
+												<img src="./resources/images/blog/card_icn.png" alt="logo icon"
+													class="img-fluid blg_icn" />
+												<div class="px-2">
+													<Link class="text-decoration-none text-black">`+ blogs[i].title.substring(0, 35) + `
+													</Link>
+													<div>`+ formattedDate + `</div>
+												</div>
+												<span class="fs-4" style="color:gray">
+													<i class="fa-solid fa-arrow-up"
+														style="transform: rotate(45deg);"></i>
+												</span>
+											</div>
+
+											<p style="color:rgba(111, 111, 111, 1)" class="mt-3">`+ blogs[i].short_description.substring(0, 75) + `... <b>Read More</b></p>
+										</div>
+									</div>
+								</div>
+							</div>`;
 			}
 			// <i class="fa-solid fa-thumbs-up"></i>
 			$('#blogsByCategory').html(list);
@@ -487,4 +518,16 @@ const getBlogsByCategory = async (category_id) => {
 		console.log('Something went wrong!');
 		alert('Once Aman sir will provide APIs I will dissappear from here!');
 	});
+}
+
+const shareOnTwitterX = (url) => {
+	var twitterWindow = window.open('https://twitter.com/share?url='+url , 'twitter-popup', 'height=350,width=600');
+  if(twitterWindow.focus) { twitterWindow.focus(); }
+    return false;
+}
+
+const shareOnFacebook = (url) => {
+	var facebookWindow = window.open('https://www.facebook.com/sharer/sharer.php?u='+url, 'facebook-popup', 'height=600,width=800');
+  if(facebookWindow.focus) { facebookWindow.focus(); }
+    return false;
 }
