@@ -30,11 +30,12 @@
         crossorigin="anonymous"></script>
     <!-- bootstrap -->
     <!-- jquery and blog js -->
-	<script src="./resources/js/config.js"></script>
-	<script src="./resources/js/jquery.min.js"></script>
-    <link href="./resources/css/toastr.min.css" rel="stylesheet"></link>
+    <script src="./resources/js/config.js"></script>
+    <script src="./resources/js/jquery.min.js"></script>
+    <link href="./resources/css/toastr.min.css" rel="stylesheet">
+    </link>
     <script src="./resources/js/toastr.min.js"></script>
-	<script src="./resources/js/blog.js"></script>
+    <script src="./resources/js/blog.js"></script>
 
     <meta name="keywords"
         content="Fantasy Play Sports, Sportsmint Official Blog, Fantasy Cricket Blog, predictions to play fantasy cricket, daily fantasy sports blogs, fantasy cricket blog" />
@@ -84,9 +85,9 @@
             $("#footer").load("footer.html");
             $("#footerBanner").load("footerBanner.html");
             const params = new URLSearchParams(document.location.search);
-			const id = params.get("c");
+            const id = params.get("c");
             const category_name = params.get("cn");
-			$('#category_name').html(String(category_name).charAt(0).toUpperCase() + String(category_name).slice(1));
+            $('#category_name').html(String(category_name).charAt(0).toUpperCase() + String(category_name).slice(1));
             getBlogsByCategory(id);
         });
     </script>
@@ -136,9 +137,9 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 
-<script>
+<!-- <script>
     var swiper1 = new Swiper(".logslider", {
-        slidesPerView: 4,
+        // slidesPerView: 3,
         spaceBetween: 15,
         pagination: {
             el: ".swiper-pagination",
@@ -149,6 +150,49 @@
             delay: 2500,
             disableOnInteraction: false,
         },
+        breakpoints: {
+            '480': {
+                slidesPerView: 1,
+                spaceBetween: 15,
+            },
+            '@640': {
+                slidesPerView: 3,
+                spaceBetween: 15,
+            },
+        }
+    });
+</script> -->
+
+<script>
+    var swiper1 = new Swiper(".logslider", {
+        spaceBetween: 15,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        loop: true,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+        breakpoints: {
+            280: { // without quotes
+                slidesPerView: 1,
+                spaceBetween: 15,
+            },
+            640: { // without quotes
+                slidesPerView: 2,
+                spaceBetween: 15,
+            },
+            740: { // without quotes
+                slidesPerView: 3,
+                spaceBetween: 15,
+            },
+            1200: { // without quotes
+                slidesPerView: 4,
+                spaceBetween: 15,
+            },
+        }
     });
 </script>
 

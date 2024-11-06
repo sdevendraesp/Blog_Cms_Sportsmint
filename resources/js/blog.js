@@ -314,7 +314,7 @@ const getBlogCategories = async () => {
 				for (let i = 0; i < data.length; i++) {
 					list += `<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto">
 								<a href="`+ BASE_URL + `category-blog.html?c=` + data[i].id + `&cn=` + data[i].category_name + `" class="text-decoration-none">
-									<Button class="px-4 mb-4 btn btn-primary-outline-btn">`+ data[i].category_name + `</Button>
+									<Button class="px-4 btn btn-primary-outline-btn">`+ data[i].category_name + `</Button>
 								</a>
 							</div>`;
 				}
@@ -414,8 +414,17 @@ const getPressRelease = async () => {
                         <a target="__blank" href="`+ listData[i].url + `" class="text-decoration-none">
                             <div class="press_card">
                                 <img src="`+ IMG_URL + listData[i].image + `" alt="` + listData[i].title + `" class="img-fluid">
-                                <p class="my-2 text-white">`+ listData[i].title + `</p>
-                                <p class="my-2 text-white">`+ listData[i].short_description + `</p>
+								<div class='p-2'>
+                                  <p class="my-2 text-white">`+ listData[i].title + `</p>
+                                  <p class="my-2 text-white">`+ listData[i].short_description + `</p>
+
+								  <div class="d-flex align-items-center justify-content-start">
+									 <div class="me-2">
+									   <img src="resources/images/blog/labels.png" alt="label tag">
+									 </div>
+									 <span style="color: rgba(88, 174, 255, 1)">`+ listData[i].hashtag + `</span>
+								  </div>
+								</div>
                             </div>
                         </a>
                     </div>`;
