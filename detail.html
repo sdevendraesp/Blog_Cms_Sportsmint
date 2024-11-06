@@ -64,8 +64,7 @@
         $("#footer").load("footer.html");
         $("#footerBanner").load("footerBanner.html");
         const params = new URLSearchParams(document.location.search);
-        const id = params.get("id");
-
+        const id = params.get("id"); 
         $("#blog_id").val(id);
         getBlogDetail(id);
         getLatestBlog();
