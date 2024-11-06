@@ -166,12 +166,16 @@ const getBlogDetail = async (id) => {
 				let date = new Date(blogDetail.created_at);
 				let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 
+				// $('head').append( `<meta name="description" content="`+blogDetail.meta_description+`">` );
+				// $('head').append( `<meta name="keywords" content="`+blogDetail.labels+`">` );
 				$('#blogTitle').html(blogDetail.title);
 				$('#blogImage').html(blogImageHtml);
 				$('#blogDate').html(formattedDate);
 				$('#blogLabels').html(labelsHtml);
 				$('#blogShortDescription').html(blogDetail.short_description);
 				$('#blogDescription').html(blogDetail.description);
+				$('meta[name=keywords]').attr('content', blogDetail.labels);
+				$('meta[name=description]').attr('content', blogDetail.description);
 			}
 		})
 		.catch(error => {
@@ -377,16 +381,30 @@ const getBlogsByCategory = async (category_id) => {
 }
 
 const shareOnTwitterX = (url) => {
-	var twitterWindow = window.open('https://twitter.com/share?url=' + url, 'twitter-popup', 'height=350,width=600');
+	var twitterWindow = window.open('https://twitter.com/share?url=' + url, 'twitter-popup');
 	if (twitterWindow.focus) { twitterWindow.focus(); }
 	return false;
 }
 
 const shareOnFacebook = (url) => {
-	var facebookWindow = window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, 'facebook-popup', 'height=600,width=800');
+	var facebookWindow = window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, 'facebook-popup');
 	if (facebookWindow.focus) { facebookWindow.focus(); }
 	return false;
 }
+
+const shareOnLinkedIn = (url) => {
+	var linkedinWindow = window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, 'Linkedin-popup');
+	if (linkedinWindow.focus) { linkedinWindow.focus(); }
+	return false;
+}
+
+const shareOnTelegram = (url) => {
+	var linkedinWindow = window.open('https://t.me/share/url?url=' + url, 'Telegram-popup');
+	if (linkedinWindow.focus) { linkedinWindow.focus(); }
+	return false;
+}
+
+
 
 ////////////////// Press Release script ///////////////////////////////
 
@@ -398,7 +416,7 @@ const getPressRelease = async () => {
 				let list = ``;
 				for (let i = 0; i < listData.length; i++) {
 					list += `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                        <a target="__blank" href="`+listData[i].url+`" class="text-decoration-none">
+                        <a target="__blank" href="`+ listData[i].url + `" class="text-decoration-none">
                             <div class="press_card">
                                 <img src="`+ IMG_URL + listData[i].image + `" alt="` + listData[i].title + `" class="img-fluid">
                                 <p class="my-2 text-white">`+ listData[i].title + `</p>

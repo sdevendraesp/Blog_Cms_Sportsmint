@@ -8,7 +8,8 @@
     document.querySelector("#nav2").href = WEBSITE_URL + "nfts";
     document.querySelector("#nav3").href = WEBSITE_URL + "marketplace";
     document.querySelector("#nav4").href = WEBSITE_URL + "earnerboard";
-    document.querySelector("#nav5").href = WEBSITE_URL;
+    document.querySelector("#nav5").href = BASE_URL;
+    document.querySelector("#nav6").href = BASE_URL + "press.html";
 
     if (loginUserData != "") {
         let action = `<button type="button" class="px-5 me-4 btn btn-primary-outline-btn" onclick="redirectTo('events')">ContestS</button>
@@ -66,6 +67,7 @@
         <a class="nav-link" id="nav3" href="#">MARKETPLACE</a>
         <a class="nav-link" id="nav4" href="#">TOP EARNER</a>
         <a class="nav-link" id="nav5" href="#">BLOG</a>
+        <a class="nav-link" id="nav6" href="#">PRESS</a>
       </div>
 
       <div
@@ -105,6 +107,7 @@
       <a class="nav-link my-3" id="nav3" href="#">MARKETPLACE</a>
       <a class="nav-link my-3" id="nav4" href="#">TOP EARNER</a>
       <a class="nav-link my-3" id="nav5" href="#">BLOG</a>
+      <a class="nav-link my-3" id="nav6" href="#">PRESS</a>
 
       <div class="mt-4" id="authAction2">
         <button class="px-5 me-4 btn btn-primary-outline-btn mb-3">
