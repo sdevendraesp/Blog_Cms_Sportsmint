@@ -37,7 +37,7 @@ const getFeaturedBlog = async () => {
 																Comments</span>
 														</div>
 													</div>
-													<a href="`+ BASE_URL + `detail.html?id=` + blogs[i]?.id + `" class="read_more">
+													<a href="`+ BASE_URL + `detail.html?id=` + blogs[i]?.id + `&md=hello&mk=hii,you" class="read_more">
 														<span class="me-1">Read More</span>
 														<span class="fs-5 d-flex text-white">
 															<i class="fa-solid fa-arrow-up" style="transform: rotate(45deg); color: gray"></i>
@@ -165,17 +165,12 @@ const getBlogDetail = async (id) => {
 
 				let date = new Date(blogDetail.created_at);
 				let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-
-				// $('head').append( `<meta name="description" content="`+blogDetail.meta_description+`">` );
-				// $('head').append( `<meta name="keywords" content="`+blogDetail.labels+`">` );
 				$('#blogTitle').html(blogDetail.title);
 				$('#blogImage').html(blogImageHtml);
 				$('#blogDate').html(formattedDate);
 				$('#blogLabels').html(labelsHtml);
 				$('#blogShortDescription').html(blogDetail.short_description);
 				$('#blogDescription').html(blogDetail.description);
-				$('meta[name=keywords]').attr('content', blogDetail.labels);
-				$('meta[name=description]').attr('content', blogDetail.description);
 			}
 		})
 		.catch(error => {
