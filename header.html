@@ -4,11 +4,11 @@
       ? JSON.parse(localStorage.getItem("loginSuccessWeb3Sports"))
       : ""; /// get it from local storage
 
-    document.querySelector("#nav1").href = BASE_URL + "features";
-    document.querySelector("#nav2").href = BASE_URL + "nfts";
-    document.querySelector("#nav3").href = BASE_URL + "marketplace";
-    document.querySelector("#nav4").href = BASE_URL + "earnerboard";
-    document.querySelector("#nav5").href = BASE_URL;
+    document.querySelector("#nav1").href = WEBSITE_URL + "features";
+    document.querySelector("#nav2").href = WEBSITE_URL + "nfts";
+    document.querySelector("#nav3").href = WEBSITE_URL + "marketplace";
+    document.querySelector("#nav4").href = WEBSITE_URL + "earnerboard";
+    document.querySelector("#nav5").href = WEBSITE_URL;
 
     if (loginUserData != "") {
         let action = `<button type="button" class="px-5 me-4 btn btn-primary-outline-btn" onclick="redirectTo('events')">ContestS</button>

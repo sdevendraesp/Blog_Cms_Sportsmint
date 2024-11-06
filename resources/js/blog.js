@@ -6,76 +6,21 @@ if (loginUserData != "") {
 	user_id = loginUserData?.data.id;
 }
 
-// let blogs = [
-// 	{
-// 		"id": 3,
-// 		"title": "Master the Game with Fantasy Sports Insights and Tips",
-// 		"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
-// 		"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
-// 		"image": "./resources/images/blog/cricket-ball.png",
-// 		"comment_count": "5",
-// 		"datetime": "2024-11-28"
-// 	},
-// 	{
-// 		"id": 3,
-// 		"title": "Master the Game with Fantasy Sports Insights and Tips",
-// 		"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
-// 		"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
-// 		"image": "./resources/images/blog/cricket-ball.png",
-// 		"comment_count": "20",
-// 		"datetime": "2024-11-27"
-// 	},
-// 	{
-// 		"id": 3,
-// 		"title": "Master the Game with Fantasy Sports Insights and Tips",
-// 		"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
-// 		"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
-// 		"image": "./resources/images/blog/cricket-ball.png",
-// 		"comment_count": "",
-// 		"datetime": "2024-11-26"
-// 	},
-// 	{
-// 		"id": 3,
-// 		"title": "Master the Game with Fantasy Sports Insights and Tips",
-// 		"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
-// 		"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
-// 		"image": "./resources/images/blog/cricket-ball.png",
-// 		"comment_count": "20",
-// 		"datetime": "2024-11-27"
-// 	},
-// 	{
-// 		"id": 3,
-// 		"title": "Master the Game with Fantasy Sports Insights and Tips",
-// 		"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
-// 		"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
-// 		"image": "./resources/images/blog/cricket-ball.png",
-// 		"comment_count": "20",
-// 		"datetime": "2024-11-27"
-// 	},
-// ]
-
-
 const getFeaturedBlog = async () => {
-	let request = $.ajax({
-		url: API_URL + "getFeaturedBlog",
-		type: "GET",
-		dataType: "JSON"
-	});
-	request.done(function (result) {
-		if (result?.success) {
-			let blogs = result.data;
+	ajaxCallGet("getFeaturedBlog")
+		.then(result => {
+			if (result?.success) {
+				let blogs = result.data;
+				let featuredBlog = ``;
+				for (let i = 0; i < blogs.length; i++) {
+					let labels = blogs[i]?.labels.split(',');
+					let date = new Date(blogs[i]?.created_at);
+					let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 
-			let featuredBlog = ``;
-
-			for (let i = 0; i < blogs.length; i++) {
-				let labels = blogs[i]?.labels.split(',');
-				let date = new Date(blogs[i]?.created_at);
-				let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-
-				// let labels = blogs[i]?.labels;
-				// labels = labels.replace(/["{}]/g, ""); // remove the curly braces and quotes
-				// labels = labels.split(", ");
-				featuredBlog += `<div class="swiper-slide">
+					// let labels = blogs[i]?.labels;
+					// labels = labels.replace(/["{}]/g, ""); // remove the curly braces and quotes
+					// labels = labels.split(", ");
+					featuredBlog += `<div class="swiper-slide">
 							<div class="pb-5 row">
 								<div class="col-lg-6 mb-5 mb-lg-0">
 									<div class="position-relative">
@@ -112,55 +57,46 @@ const getFeaturedBlog = async () => {
 									<h5 class="mt-4">`+ blogs[i]?.title + `</h5>
 									<p class="mt-3">`+ blogs[i]?.short_description + `</p>`;
 
-				if (labels?.length > 0) {
+					if (labels?.length > 0) {
 
-					featuredBlog += `<div class="">
+						featuredBlog += `<div class="">
 										<p class="fs-4">Labels</p>
 										<div class="row">`;
-					for (let j = 0; j < labels?.length; j++) {
-						featuredBlog += `<div class="col-lg-auto col-xs-auto col-sm-6">
+						for (let j = 0; j < labels?.length; j++) {
+							featuredBlog += `<div class="col-lg-auto col-xs-auto col-sm-6">
 												<div class="d-flex align-items-center justify-content-start">
 													<div class="me-2"><img src="resources/images/blog/labels.png" alt="label tag" />
 													</div>
 													<span style="color: rgba(88, 174, 255, 1)">`+ labels[j] + `</span>
 												</div>
 											</div>`;
+						}
+						featuredBlog += `</div>
+									</div>`;
 					}
 					featuredBlog += `</div>
-									</div>`;
-				}
-				featuredBlog += `</div>
 							</div>
 						</div>`;
+				}
+				$('#featuredBlog').html(featuredBlog);
+
 			}
-			$('#featuredBlog').html(featuredBlog);
-
-		}
-	});
-
-	request.fail(function (jqXHR, textStatus) {
-		console.log('Something went wrong!');
-		alert('Something went wrong!');
-	});
+		})
+		.catch(error => {
+			console.log(error);
+		});
 }
 
 const getLatestBlog = async () => {
-	let request = $.ajax({
-		url: API_URL + "getLatestBlog",
-		type: "GET",
-		dataType: "JSON"
-	});
-	request.done(function (result) {
-		if (result?.success) {
-			let blogs = result.data;
-
-			let latestBlog = ``;
-			for (let i = 0; i < blogs.length; i++) {
-				let date = new Date(blogs[i].created_at);
-				let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-
-
-				latestBlog += `<div class="swiper-slide">
+	ajaxCallGet("getLatestBlog")
+		.then(result => {
+			if (result?.success) {
+				let blogs = result.data;
+				let latestBlog = ``;
+				for (let i = 0; i < blogs.length; i++) {
+					let date = new Date(blogs[i].created_at);
+					let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+					latestBlog += `<div class="swiper-slide">
 								<div class="" key={index} onClick="goToBlogDetail(` + blogs[i].id + `)">
 									<div class="blog_card">
 										<img src='`+ IMG_URL + blogs[i].image + `' alt="blog image"
@@ -185,16 +121,14 @@ const getLatestBlog = async () => {
 									</div>
 								</div>
 							</div>`;
+				}
+				$('#latestBlog').html(latestBlog)
+
 			}
-			$('#latestBlog').html(latestBlog)
-
-		}
-	});
-
-	request.fail(function (jqXHR, textStatus) {
-		console.log('Something went wrong!');
-		alert('Something went wrong!');
-	});
+		})
+		.catch(error => {
+			console.log(error);
+		});
 }
 
 const goToBlogDetail = (id) => {
@@ -202,104 +136,65 @@ const goToBlogDetail = (id) => {
 }
 
 const getBlogDetail = async (id) => {
-	let request = $.ajax({
-		url: API_URL + "getBlogDetail?blog_id=" + id,
-		type: "GET",
-		dataType: "JSON"
-	});
-	request.done(function (result) {
-		if (result?.success) {
-			let blogDetail = result.data;
-
-			// let blogDetail = {
-			// 	"id": 4,
-			// 	"title": "Master the Game with Fantasy Sports Insights and Tips",
-			// 	"short_description": "Fantasy sports have taken the world by storm, offering fans an exciting way to engage with their favorite sports and athletes. Whether you're new to the game or a seasoned veteran, crafting the perfect team requires strategy, knowledge, and a little bit of luck. Here are some essential tips to help you dominate your league on SportsMint and come out on top.",
-			// 	"labels": "fantasy cricket, fantasy cricket league, indian fantasy cricket, fantasy sports",
-			// 	"description": `<p>From its humble origins as a way to manage teams and players to a multibillion-dollar
-			// 									business, this virtual world fundamentally changed our passion for games.</p>
-
-			// 								<p>But what exactly is pushing such exponential growth? Why are fantasy leagues drawing
-			// 									in individuals from all walks of life, from the casual spectators to hardcore
-			// 									enthusiasts? The appeal goes beyond mere amusement; it taps into essential human
-			// 									drives for competition, affiliation and mastery.</p>
-
-			// 								<p>This article shall therefore examine five most important factors that have led to
-			// 									global domination of fantasy sports taking into account how these are interlinked
-			// 									and influencing each other.</p>
-
-			// 								<p>With distinctive features that can touch diverse global audiences, such as the thrill
-			// 									of one-on-one contests and chances of winning huge monetary awards, fantasy sports
-			// 									cricket offer something different from other forms of entertainment worldwide.</p>
-
-			// 								<p>With distinctive features that can touch diverse global audiences, such as the thrill
-			// 									of one-on-one contests and chances of winning huge monetary awards, fantasy sports
-			// 									cricket offer something different from other forms of entertainment worldwide.</p>`,
-			// 	"image": "",
-			// 	// "image": "./resources/images/blog/cricket-ball.png",
-			// 	"comment_count": "5",
-			// 	"datetime": "2024-11-28"
-			// };
-
-			let labels = blogDetail.labels.split(',');
-			let labelsHtml = ``;
-			if (labels.length > 0) {
-				for (let j = 0; j < labels.length; j++) {
-					labelsHtml += `<div class="col-lg-auto col-xs-auto col-sm-6">
+	let endPoint = "getBlogDetail?blog_id=" + id;
+	ajaxCallGet(endPoint)
+		.then(result => {
+			if (result?.success) {
+				let blogDetail = result.data;
+				let labels = blogDetail.labels.split(',');
+				let labelsHtml = ``;
+				if (labels.length > 0) {
+					for (let j = 0; j < labels.length; j++) {
+						labelsHtml += `<div class="col-lg-auto col-xs-auto col-sm-6">
 											<div class="d-flex align-items-center justify-content-start">
 												<div class="me-2"><img src="resources/images/blog/labels.png" alt="label tag" />
 												</div>
 												<span style="color: rgba(88, 174, 255, 1)">`+ labels[j] + `</span>
 											</div>
 										</div>`;
+					}
 				}
-			}
-			else {
-				// $('#blogLabelSection').hide();
-			}
-			let blogImage = "../resources/images/blog/cricket-ball.png";
-			if (blogDetail.image && blogDetail.image != "") {
-				blogImage = IMG_URL + blogDetail.image;
-			}
-			let blogImageHtml = `<img src="` + blogImage + `" alt="` + blogDetail.title + `" class="img-fluid" />`;
+				else {
+					// $('#blogLabelSection').hide();
+				}
+				let blogImage = "../resources/images/blog/cricket-ball.png";
+				if (blogDetail.image && blogDetail.image != "") {
+					blogImage = IMG_URL + blogDetail.image;
+				}
+				let blogImageHtml = `<img src="` + blogImage + `" alt="` + blogDetail.title + `" class="img-fluid" />`;
 
-			let date = new Date(blogDetail.created_at);
-			let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+				let date = new Date(blogDetail.created_at);
+				let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 
-			$('#blogTitle').html(blogDetail.title);
-			$('#blogImage').html(blogImageHtml);
-			$('#blogDate').html(formattedDate);
-			$('#blogLabels').html(labelsHtml);
-			$('#blogShortDescription').html(blogDetail.short_description);
-			$('#blogDescription').html(blogDetail.description);
-		}
-	});
-	request.fail(function (jqXHR, textStatus) {
-		console.log('Something went wrong!');
-		alert('Something went wrong!');
-	});
+				$('#blogTitle').html(blogDetail.title);
+				$('#blogImage').html(blogImageHtml);
+				$('#blogDate').html(formattedDate);
+				$('#blogLabels').html(labelsHtml);
+				$('#blogShortDescription').html(blogDetail.short_description);
+				$('#blogDescription').html(blogDetail.description);
+			}
+		})
+		.catch(error => {
+			console.log(error);
+		});
 }
 
 const getComments = async (blog_id) => {
-	let request = $.ajax({
-		url: API_URL + "getComments?blog_id=" + blog_id,
-		type: "GET",
-		// data :{blog_id},
-		dataType: "JSON"
-	});
-	request.done(function (result) {
-		if (result?.success) {
-			let data = result.data;
-			$('#blogCommentCount').html(data.length)
-			let comments = ``;
-			for (let i = 0; i < data.length; i++) {
-				let date = new Date(data[i].created_at);
-				let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	let endPoint = "getComments?blog_id=" + blog_id;
+	ajaxCallGet(endPoint)
+		.then(result => {
+			if (result?.success) {
+				let data = result.data;
+				$('#blogCommentCount').html(data.length)
+				let comments = ``;
+				for (let i = 0; i < data.length; i++) {
+					let date = new Date(data[i].created_at);
+					let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 
-				comments += `<div class="comment_box mt-4">
+					comments += `<div class="comment_box mt-4">
 											<div class="comment_wrapper">
 												<div class="d-flex align-items-center justify-content-start">
-													<img src="`+data[i].profile_pic+`"
+													<img src="`+ data[i].profile_pic + `"
 														class="p_p img-fluid me-2">
 
 													<div class="name mb-0 me-5">`+ data[i].name + `</div>
@@ -310,29 +205,27 @@ const getComments = async (blog_id) => {
 
 											<div class="feature d-flex align-items-center">
 												<span class="like me-4" onclick="likeThisComment(`+ data[i].id + `, ` + blog_id + `)">
-													<i class="fa-regular fa-thumbs-up"></i> &nbsp; `+data[i].like_count+`
+													<i class="fa-regular fa-thumbs-up"></i> &nbsp; `+ data[i].like_count + `
 												</span>
 
 											</div>
 
 											<hr class="mt-2">
 										</div>`;
+				}
+				// <i class="fa-solid fa-thumbs-up"></i>
+				$('#commentBox').html(comments);
 			}
-			// <i class="fa-solid fa-thumbs-up"></i>
-			$('#commentBox').html(comments);
-		}
-	});
-
-	request.fail(function (jqXHR, textStatus) {
-		console.log('Something went wrong!');
-		alert('Something went wrong!');
-	});
+		})
+		.catch(error => {
+			console.log(error);
+		});
 }
 
 const likeThisComment = (comment_id, blog_id) => {
 
 	if (loginUserData == "") {
-		alert('Login required!!!!!')
+		showAlert('ERROR', 'Login required!!!!!')
 		return;
 	}
 	else {
@@ -382,108 +275,73 @@ const commentFormSubmit = () => {
 		returnError('comment');
 		return;
 	}
-	// let form = $('#blogCommentForm');
-	try {
-		$.ajax({
-			type: "POST",
-			url: API_URL + "submitComment",
-			data: {
-				'name': $('#name').val(),
-				'email': $('#email').val(),
-				'comment': $('#comment').val(),
-				'blog_id': $('#blog_id').val(),
-				'website': $('#website').val(),
-				'user_id': user_id
-			},
-			dataType: "JSON",
-			success: function (result) {
-				if (result?.success) {
-					$('.form_control').removeClass('requiredThis')
-					$('#name').val("");
-					$('#email').val("");
-					$('#website').val("");
-					$('#comment').val("");
-					$('#resMsg').html(`<p class="alert alert-success">Comment submitted successfully.</p>`);
-				}
-				else {
-					returnError(result?.msg);
-					return;
-				}
-			},
-			error: function (data) {
-				console.log('An error occurred.');
-				returnError('Something went wrong. Please try again!');
-				return;
-			},
-		});
-	} catch (error) {
-		returnError('Something went wrong. Please try again!');
-		return;
+
+	let body = {
+		'name': $('#name').val(),
+		'email': $('#email').val(),
+		'comment': $('#comment').val(),
+		'blog_id': $('#blog_id').val(),
+		'website': $('#website').val(),
+		'user_id': user_id
 	}
+	ajaxCallPost("submitComment", body)
+		.then(result => {
+			if (result?.success) {
+				$('.form_control').removeClass('requiredThis')
+				$('#name').val("");
+				$('#email').val("");
+				$('#website').val("");
+				$('#comment').val("");
+				$('#resMsg').html(`<p class="alert alert-success">Comment submitted successfully.</p>`);
+			}
+			else {
+				returnError(result?.msg);
+				return;
+			}
+		})
+		.catch(error => {
+			console.log(error);
+			returnError('Something went wrong. Please try again!');
+			return;
+		});
 }
 
 const getBlogCategories = async () => {
-	let request = $.ajax({
-		url: API_URL + "getBlogCategories",
-		type: "GET",
-		dataType: "JSON"
-	});
-	request.done(function (result) {
-		if (result?.success) {
-			let data = result.data;
-
-			// let data = [
-			// 	{
-			// 		"id":1,
-			// 		"category":"Games",
-			// 	},
-			// 	{
-			// 		"id":1,
-			// 		"category":"Sports",
-			// 	},
-			// 	{
-			// 		"id":1,
-			// 		"category":"Cricket",
-			// 	},
-			// 	{
-			// 		"id":1,
-			// 		"category":"Fantacy",
-			// 	}
-			// ]
-			let list = ``;
-			for (let i = 0; i < data.length; i++) {
-				list += `<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto">
+	ajaxCallGet('getBlogCategories')
+		.then(result => {
+			if (result?.success) {
+				let data = result.data;
+				let list = ``;
+				for (let i = 0; i < data.length; i++) {
+					list += `<div class="col-xs-auto col-md-auto col-lg-auto col-xl-auto">
 								<a href="`+ BASE_URL + `category-blog.html?c=` + data[i].id + `&cn=` + data[i].category_name + `" class="text-decoration-none">
 									<Button class="px-4 mb-4 btn btn-primary-outline-btn">`+ data[i].category_name + `</Button>
 								</a>
 							</div>`;
+				}
+				$('#blogCategories').html(list);
 			}
-			$('#blogCategories').html(list);
-		}
-	});
+		})
+		.catch(error => {
+			// handle error
+			console.log(error);
+		});
 
-	request.fail(function (jqXHR, textStatus) {
-		console.log('Something went wrong!');
-		alert('Something went wrong!');
-	});
 }
 
 // 
 const getBlogsByCategory = async (category_id) => {
-	let request = $.ajax({
-		url: API_URL + "getBlogsByCategory?category_id=" + category_id,
-		type: "GET",
-		dataType: "JSON"
-	});
-	request.done(function (result) {
-		if (result?.success) {
-			let blogs = result.data;
-			let list = ``;
-			for (let i = 0; i < blogs.length; i++) {
-				let date = new Date(blogs[i].created_at);
-				let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	let endPoint = "getBlogsByCategory?category_id=" + category_id;
+	ajaxCallGet(endPoint)
+		.then(result => {
+			if (result?.success) {
+				let blogs = result.data;
+				let list = ``;
+				for (let i = 0; i < blogs.length; i++) {
+					let date = new Date(blogs[i].created_at);
+					let formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 
-				list += `<div class="swiper-slide">
+					list += `<div class="swiper-slide">
 								<div class="" key={index} onClick="goToBlogDetail(` + blogs[i].id + `)">
 									<div class="blog_card">
 										<img src='`+ IMG_URL + blogs[i].image + `' alt="blog image"
@@ -508,26 +366,117 @@ const getBlogsByCategory = async (category_id) => {
 									</div>
 								</div>
 							</div>`;
+				}
+				// <i class="fa-solid fa-thumbs-up"></i>
+				$('#blogsByCategory').html(list);
 			}
-			// <i class="fa-solid fa-thumbs-up"></i>
-			$('#blogsByCategory').html(list);
-		}
-	});
-
-	request.fail(function (jqXHR, textStatus) {
-		console.log('Something went wrong!');
-		alert('Once Aman sir will provide APIs I will dissappear from here!');
-	});
+		})
+		.catch(error => {
+			console.log(error);
+		});
 }
 
 const shareOnTwitterX = (url) => {
-	var twitterWindow = window.open('https://twitter.com/share?url='+url , 'twitter-popup', 'height=350,width=600');
-  if(twitterWindow.focus) { twitterWindow.focus(); }
-    return false;
+	var twitterWindow = window.open('https://twitter.com/share?url=' + url, 'twitter-popup', 'height=350,width=600');
+	if (twitterWindow.focus) { twitterWindow.focus(); }
+	return false;
 }
 
 const shareOnFacebook = (url) => {
-	var facebookWindow = window.open('https://www.facebook.com/sharer/sharer.php?u='+url, 'facebook-popup', 'height=600,width=800');
-  if(facebookWindow.focus) { facebookWindow.focus(); }
-    return false;
+	var facebookWindow = window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, 'facebook-popup', 'height=600,width=800');
+	if (facebookWindow.focus) { facebookWindow.focus(); }
+	return false;
+}
+
+////////////////// Press Release script ///////////////////////////////
+
+const getPressRelease = async () => {
+	ajaxCallGet('getPressRelease')
+		.then(result => {
+			if (result?.success) {
+				let listData = result.data;
+				let list = ``;
+				for (let i = 0; i < listData.length; i++) {
+					list += `<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                        <a target="__blank" href="`+listData[i].url+`" class="text-decoration-none">
+                            <div class="press_card">
+                                <img src="`+ IMG_URL + listData[i].image + `" alt="` + listData[i].title + `" class="img-fluid">
+                                <p class="my-2 text-white">`+ listData[i].title + `</p>
+                                <p class="my-2 text-white">`+ listData[i].short_description + `</p>
+                            </div>
+                        </a>
+                    </div>`;
+				}
+				$('#pressRelease').html(list);
+			}
+		})
+		.catch(error => {
+			console.log(error);
+		});
+}
+
+/////////////////// AJAX Generic Functions to make GET & POST requests ///////////////////////////////
+const ajaxCallGet = (endPoint) => {
+	return new Promise((resolve, reject) => {
+		$.ajax({
+			url: API_URL + endPoint,
+			type: "GET",
+			dataType: "json",
+			success: function (result) {
+				resolve(result);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.error('Error: ' + textStatus, errorThrown);
+				reject('Something went wrong!');
+			}
+		});
+	});
+}
+
+const ajaxCallPost = (endPoint, body) => {
+	return new Promise((resolve, reject) => {
+		$.ajax({
+			url: API_URL + endPoint,
+			type: "POST",
+			data: body,
+			dataType: "json",
+			success: function (result) {
+				resolve(result);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.error('Error: ' + textStatus, errorThrown);
+				reject('Something went wrong!');
+			}
+		});
+	});
+}
+
+//  Toaster
+
+const showAlert = (type, msg) => {
+	toastr.options = {
+		"closeButton": true,
+		"newestOnTop": false,
+		"progressBar": true,
+		"positionClass": "toast-top-center",
+		"preventDuplicates": false,
+		"onclick": null,
+		"showDuration": "300",
+		"hideDuration": "1000",
+		"timeOut": "5000",
+		"extendedTimeOut": "1000",
+		"showEasing": "swing",
+		"hideEasing": "linear",
+		"showMethod": "fadeIn",
+		"hideMethod": "fadeOut"
+	}
+	if (type == "SUCCESS") {
+		toastr.success(msg);
+	}
+	else if (type == "WARNING") {
+		toastr.warning(msg);
+	}
+	else if (type == "ERROR") {
+		toastr.error(msg);
+	}
 }
