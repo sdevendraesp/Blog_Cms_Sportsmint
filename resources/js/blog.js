@@ -417,13 +417,6 @@ const getPressRelease = async () => {
 								<div class='p-2'>
                                   <p class="my-2 text-white">`+ listData[i].title + `</p>
                                   <p class="my-2 text-white">`+ listData[i].short_description + `</p>
-
-								  <div class="d-flex align-items-center justify-content-start">
-									 <div class="me-2">
-									   <img src="resources/images/blog/labels.png" alt="label tag">
-									 </div>
-									 <span style="color: rgba(88, 174, 255, 1)">`+ listData[i].hashtag + `</span>
-								  </div>
 								</div>
                             </div>
                         </a>
